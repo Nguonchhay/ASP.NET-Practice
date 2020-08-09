@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Vidly.Models;
 
@@ -16,6 +13,31 @@ namespace Vidly.Controllers
         {
             var movie = new Movie() { Name = "End Game" };
             return View(movie);
+        }
+
+        public ActionResult Index(int? pageIndex, String sortBy)
+        {
+            if (!pageIndex.HasValue)
+            {
+                pageIndex = 1;
+            }
+
+            if (String.IsNullOrWhiteSpace(sortBy))
+            {
+                sortBy = "Name";
+            }
+
+            return Content(string.Format("pageIndex={0}&sortBy={1}", pageIndex, sortBy));
+        }
+
+        public ActionResult Edit(int id)
+        {
+            return Content("id=" + id);
+        }
+
+        public ActionResult ByReleaseDate(int year, int month)
+        {
+            return Content(string.Format("year={0}&month={1}", year, month));
         }
     }
 }

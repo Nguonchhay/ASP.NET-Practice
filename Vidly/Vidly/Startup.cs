@@ -49,6 +49,11 @@ namespace Vidly
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
+                    name: "MovieByReleaseDate",
+                    pattern: "{controller=Movies}/{action=ByReleaseDate}/{year}/{month}",
+                    constraints: new { year = @"\d{4}", month = "\\d{2}" });
+
+                endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
